@@ -130,7 +130,7 @@ function main()
 end
 
 function cmd_testo222(arg)
-    sampAddChatMessage("Получилось", -1)
+    sampAddChatMessage("Получилось, версия скрипта: {FFFF00}1.0.7", -1)
 end
 function se.onTogglePlayerSpectating(state)
     if state then
