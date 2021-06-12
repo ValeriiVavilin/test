@@ -21,7 +21,7 @@ local secondary_window_state = imgui.ImBool(false)
 local text_buffer = imgui.ImBuffer(256)
 
 
-latest = "1.0.4"
+latest = "1.0.5"
 
 
 -- чекбоксы
@@ -400,7 +400,7 @@ function autoupdate(json_url, prefix, url)
                   local dlstatus = require('moonloader').download_status
                   local color = -1
                   sampAddChatMessage(('[Ghelper]{FFFFFF} Доступно новое обновление! Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), 0x046D63)
-                  wait(250)
+                  wait(1000)
                   downloadUrlToFile(updatelink, thisScript().path,
                     function(id3, status1, p13, p23)
                       if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
@@ -408,7 +408,7 @@ function autoupdate(json_url, prefix, url)
                         sampAddChatMessage(('[Ghelper]{FFFFFF} Скрипт успешно обновлён.'), 0x046D63)
                         sampAddChatMessage(('[Ghelper]{FFFFFF} Ознакомиться со всеми обновлениями вы сможете по команде /upds.'), 0x046D63)
                         goupdatestatus = true
-                        lua_thread.create(function() wait(500) thisScript():reload() end)
+                        lua_thread.create(function() wait(1000) thisScript():reload() end)
                       end
                       if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                         if goupdatestatus == nil then
@@ -430,5 +430,5 @@ function autoupdate(json_url, prefix, url)
         end
       end
     )
-    while update ~= false do wait(100) end
+    while update ~= false do wait(3000) end
 end
