@@ -21,7 +21,7 @@ local secondary_window_state = imgui.ImBool(false)
 local text_buffer = imgui.ImBuffer(256)
 
 
-
+latest = "1.0.4"
 
 
 -- чекбоксы
