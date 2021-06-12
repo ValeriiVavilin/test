@@ -380,7 +380,7 @@ end
 -- Author: http://qrlk.me/samp
 --]]
 
-function autoupdate(json_url, prefix, url)
+  function autoupdate(json_url, prefix, url)
     local dlstatus = require('moonloader').download_status
     local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
     if doesFileExist(json) then os.remove(json) end
@@ -399,21 +399,20 @@ function autoupdate(json_url, prefix, url)
                 lua_thread.create(function(prefix)
                   local dlstatus = require('moonloader').download_status
                   local color = -1
-                  sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
+                  sampAddChatMessage(('[Ghelper]{FFFFFF} Доступно новое обновление! Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), 0x046D63)
                   wait(250)
                   downloadUrlToFile(updatelink, thisScript().path,
                     function(id3, status1, p13, p23)
                       if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                        print(string.format('Загружено %d из %d.', p13, p23))
                       elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                        print('Загрузка обновления завершена.')
-                        sampAddChatMessage((prefix..'Обновление завершено!'), color)
+                        sampAddChatMessage(('[Ghelper]{FFFFFF} Скрипт успешно обновлён.'), 0x046D63)
+                        sampAddChatMessage(('[Ghelper]{FFFFFF} Ознакомиться со всеми обновлениями вы сможете в Меню скрипта - помощь - обновления.'), 0x046D63)
                         goupdatestatus = true
                         lua_thread.create(function() wait(500) thisScript():reload() end)
                       end
                       if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                         if goupdatestatus == nil then
-                          sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+                          sampAddChatMessage(('[Ghelper]{FFFFFF} Не удалось обновить скрипт! Подробнее узнавайте у Валеры. Его вк - https://vk.com/alkoigel'), 0x046D63)
                           update = false
                         end
                       end
@@ -423,11 +422,9 @@ function autoupdate(json_url, prefix, url)
                 )
               else
                 update = false
-                print('v'..thisScript().version..': Обновление не требуется.')
               end
             end
           else
-            print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
             update = false
           end
         end
@@ -435,4 +432,3 @@ function autoupdate(json_url, prefix, url)
     )
     while update ~= false do wait(100) end
   end
-  
