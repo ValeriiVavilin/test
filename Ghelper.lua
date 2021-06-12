@@ -380,7 +380,7 @@ end
 -- Author: http://qrlk.me/samp
 --]]
 
-  function autoupdate(json_url, prefix, url)
+function autoupdate(json_url, prefix, url)
     local dlstatus = require('moonloader').download_status
     local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
     if doesFileExist(json) then os.remove(json) end
@@ -406,13 +406,13 @@ end
                       if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
                       elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
                         sampAddChatMessage(('[Ghelper]{FFFFFF} Скрипт успешно обновлён.'), 0x046D63)
-                        sampAddChatMessage(('[Ghelper]{FFFFFF} Ознакомиться со всеми обновлениями вы сможете в Меню скрипта - помощь - обновления.'), 0x046D63)
+                        sampAddChatMessage(('[Ghelper]{FFFFFF} Ознакомиться со всеми обновлениями вы сможете по команде /upds.'), 0x046D63)
                         goupdatestatus = true
                         lua_thread.create(function() wait(500) thisScript():reload() end)
                       end
                       if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                         if goupdatestatus == nil then
-                          sampAddChatMessage(('[Ghelper]{FFFFFF} Не удалось обновить скрипт! Подробнее узнавайте у Валеры. Его вк - https://vk.com/alkoigel'), 0x046D63)
+                          sampAddChatMessage(('[Ghelper]{FFFFFF} Не удалось обновить скрипт! Информацию можете узнать у ГС 01.'), 0x046D63)
                           update = false
                         end
                       end
@@ -431,4 +431,4 @@ end
       end
     )
     while update ~= false do wait(100) end
-  end
+end
