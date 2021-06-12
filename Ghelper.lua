@@ -21,7 +21,7 @@ local secondary_window_state = imgui.ImBool(false)
 local text_buffer = imgui.ImBuffer(256)
 
 
-latest = "1.0.5"
+latest = "1.0.6"
 
 
 -- чекбоксы
@@ -404,10 +404,11 @@ function autoupdate(json_url, prefix, url)
                   downloadUrlToFile(updatelink, thisScript().path,
                     function(id3, status1, p13, p23)
                       if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
+                        print(string.format('Загружено %d из %d.', p13, p23))
                       elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
                         sampAddChatMessage(('[Ghelper]{FFFFFF} Скрипт успешно обновлён.'), 0x046D63)
                         sampAddChatMessage(('[Ghelper]{FFFFFF} Ознакомиться со всеми обновлениями вы сможете по команде /upds.'), 0x046D63)
-                        goupdatestatus = true
+                        goupdatestatus = false
                         lua_thread.create(function() wait(1000) thisScript():reload() end)
                       end
                       if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
