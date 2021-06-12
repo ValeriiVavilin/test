@@ -21,8 +21,8 @@ local secondary_window_state = imgui.ImBool(false)
 local text_buffer = imgui.ImBuffer(256)
 
 
-latest = "1.0.6"
-
+latest = "1.0.7"
+script_version ("1.0.7")
 
 -- чекбоксы
     local checked_NakNumber        = imgui.ImInt(1)
